@@ -2,11 +2,11 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>My Installments</title>
+<title>My Installments V2</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -18,16 +18,16 @@ font-family:'Kanit',sans-serif;
 }
 
 body{
-background:#f4f6fb;
+background:#eef3f9;
 }
 
 header{
 background:#1976d2;
-color:#fff;
-padding:22px;
+color:white;
+padding:20px;
 text-align:center;
-font-size:32px;
-font-weight:bold;
+font-size:28px;
+font-weight:700;
 }
 
 .container{
@@ -37,252 +37,201 @@ padding:20px;
 }
 
 .card{
-background:#fff;
-padding:25px;
-border-radius:20px;
-box-shadow:0 8px 25px rgba(0,0,0,.08);
-margin-bottom:25px;
+background:white;
+border-radius:18px;
+padding:20px;
+margin-bottom:18px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
 }
 
-h2{
-margin-bottom:20px;
+.card h3{
+font-size:24px;
+margin-bottom:8px;
 }
 
-input{
-width:100%;
-padding:16px;
-margin-bottom:16px;
-border:1px solid #ddd;
-border-radius:12px;
+.card p{
+margin:5px 0;
 font-size:18px;
 }
 
-button{
+.status{
+color:#2e7d32;
+font-weight:bold;
+}
+
+.detailBtn{
+
+background:#43a047;
+color:white;
+
 width:100%;
-padding:16px;
+padding:14px;
 border:none;
 border-radius:12px;
-font-size:20px;
-font-weight:bold;
-cursor:pointer;
+font-size:18px;
+margin-top:15px;
+
 }
 
-.add{
-background:#1976d2;
-color:#fff;
-}
+.total{
 
-.detail{
-background:#43a047;
-color:#fff;
-margin-top:12px;
-}
-
-.delete{
-background:#d32f2f;
-color:#fff;
-margin-top:12px;
-}
-
-.item{
-background:#fff;
-padding:20px;
-border-radius:18px;
-box-shadow:0 5px 15px rgba(0,0,0,.08);
-margin-bottom:20px;
-}
-
-.item h3{
 font-size:28px;
-margin-bottom:10px;
-}
-
-.item p{
-font-size:20px;
-margin:8px 0;
-}
-
-#total{
-font-size:34px;
 font-weight:bold;
-color:#d32f2f;
 text-align:right;
-margin-top:20px;
-}
-</style>
+color:#d32f2f;
+margin-top:25px;
 
+}
+
+</style>
 </head>
 
 <body>
 
 <header>
-💳 My Installments
+💳 My Installments V2
 </header>
 
 <div class="container">
 
 <div class="card">
 
-<h2>เพิ่มรายการผ่อน</h2>
+<h3>📱 vivo V70</h3>
 
-<input
-id="name"
-type="text"
-placeholder="ชื่อสินค้า">
+<p>เลขสัญญา : SBR0001339</p>
 
-<input
-id="price"
-type="number"
-placeholder="ยอดผ่อนต่อเดือน">
+<p>💰 ผ่อนเดือนละ <b>2,230 บาท</b></p>
 
-<button
-class="add"
-onclick="addItem()">
-เพิ่มรายการ
+<p>📦 ทั้งหมด <b>14 งวด</b></p>
+
+<p class="status">⏳ รอชำระงวดที่ 1</p>
+
+<button class="detailBtn"
+onclick="openDetail(0)">
+ดูรายละเอียด
 </button>
 
 </div>
 
-<div id="list"></div>
+<div class="card">
 
-<h2 id="total">
-รวมต่อเดือน : 0 บาท
-</h2>
+<h3>⌚ Redmi Watch 5 Lite</h3>
+
+<p>💰 ผ่อนสัปดาห์ละ <b>265 บาท</b></p>
+
+<p>📦 ทั้งหมด <b>12 งวด</b></p>
+
+<p class="status">⏳ รอชำระงวดที่ 1</p>
+
+<button class="detailBtn"
+onclick="openDetail(1)">
+ดูรายละเอียด
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>🎧 Soundcore R60i NC</h3>
+
+<p>💰 ผ่อนสัปดาห์ละ <b>130 บาท</b></p>
+
+<p>📦 ทั้งหมด <b>12 งวด</b></p>
+
+<p class="status">⏳ รอชำระงวดที่ 1</p>
+
+<button class="detailBtn"
+onclick="openDetail(2)">
+ดูรายละเอียด
+</button>
+
+</div>
+
+<div class="total">
+
+รวมต้องจ่าย
+
+2,625 บาท
+
+</div>
 
 </div>
 
 <script>
 
-let items =
-JSON.parse(
-localStorage.getItem("items")
-) || [];
+function openDetail(index){
 
-render();
-
-function save(){
-
-localStorage.setItem(
-"items",
-JSON.stringify(items)
-);
-
-}
-
-function addItem(){
-
-const name =
-document.getElementById("name").value.trim();
-
-const price =
-Number(document.getElementById("price").value);
-
-if(name=="" || price<=0){
-
-alert("กรอกข้อมูลให้ครบ");
-
-return;
-
-}
-
-items.push({
-
-name:name,
-
-price:price
-
-});
-
-save();
-
-render();
-
-document.getElementById("name").value="";
-
-document.getElementById("price").value="";
-
-}
-function deleteItem(index){
-
-if(confirm("ต้องการลบรายการนี้ใช่หรือไม่?")){
-
-items.splice(index,1);
-
-save();
-
-render();
-
-}
-
-}
-
-function detail(index){
+if(index===0){
 
 alert(
-"หน้ารายละเอียดกำลังพัฒนา\n\n"+
-"สินค้า : "+items[index].name+
-"\nยอดผ่อน : "+
-items[index].price.toLocaleString()+
-" บาท/เดือน"
+"Vivo V70\n\n"+
+"เลขสัญญา : SBR0001339\n"+
+"ผ่อนเดือนละ 2,230 บาท\n"+
+"ทั้งหมด 14 งวด"
 );
 
 }
 
-function render(){
+if(index===1){
 
-let html="";
-
-let total=0;
-
-items.forEach((item,index)=>{
-
-total+=Number(item.price);
-
-html+=`
-
-<div class="item">
-
-<h3>📱 ${item.name}</h3>
-
-<p>
-💰 ผ่อนเดือนละ :
-<b>${Number(item.price).toLocaleString()} บาท</b>
-</p>
-
-<button
-class="detail"
-onclick="detail(${index})">
-
-ดูรายละเอียด
-
-</button>
-
-<button
-class="delete"
-onclick="deleteItem(${index})">
-
-ลบรายการ
-
-</button>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("list").innerHTML=html;
-
-document.getElementById("total").innerHTML=
-
-"รวมต่อเดือน : "+
-
-total.toLocaleString()
-
-+" บาท";
+alert(
+"Redmi Watch 5 Lite\n\n"+
+"265 บาท / สัปดาห์\n"+
+"12 งวด"
+);
 
 }
+
+if(index===2){
+
+alert(
+"Soundcore R60i NC\n\n"+
+"130 บาท / สัปดาห์\n"+
+"12 งวด"
+);
+
+}
+
+}
+const schedules = {
+
+0:[
+["งวด 1","15/08/2569",2230,false],
+["งวด 2","15/09/2569",2230,false],
+["งวด 3","15/10/2569",2230,false],
+["งวด 4","15/11/2569",2230,false],
+["งวด 5","15/12/2569",2230,false],
+["งวด 6","15/01/2570",2230,false],
+["งวด 7","15/02/2570",2230,false],
+["งวด 8","15/03/2570",2230,false],
+["งวด 9","15/04/2570",2230,false],
+["งวด10","15/05/2570",2230,false],
+["งวด11","15/06/2570",2230,false],
+["งวด12","15/07/2570",2230,false],
+["งวด13","15/08/2570",2230,false],
+["งวด14","15/09/2570",2230,false]
+],
+
+1:[
+["งวด 1","สัปดาห์ที่ 1",265,false],
+["งวด 2","สัปดาห์ที่ 2",265,false],
+["งวด 3","สัปดาห์ที่ 3",265,false],
+["งวด 4","สัปดาห์ที่ 4",265,false],
+["งวด 5","สัปดาห์ที่ 5",265,false],
+["งวด 6","สัปดาห์ที่ 6",265,false],
+["งวด 7","สัปดาห์ที่ 7",265,false],
+["งวด 8","สัปดาห์ที่ 8",265,false],
+["งวด 9","สัปดาห์ที่ 9",265,false],
+["งวด10","สัปดาห์ที่10",265,false],
+["งวด11","ส
+function openDetail(index){
+
+showSchedule(index);
+
+}
+
 </script>
 
 </body>
+
 </html>
