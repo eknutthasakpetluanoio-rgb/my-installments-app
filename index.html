@@ -3,11 +3,232 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>My Installments</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
+
+body{
+background:#f3f5f7;
+}
+
+header{
+background:#1976d2;
+color:white;
+padding:18px;
+font-size:26px;
+font-weight:bold;
+text-align:center;
+}
+
+.container{
+padding:20px;
+max-width:700px;
+margin:auto;
+}
+
+.card{
+background:white;
+border-radius:18px;
+padding:20px;
+box-shadow:0 5px 15px rgba(0,0,0,.12);
+margin-bottom:20px;
+}
+
+.card h2{
+margin-bottom:18px;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-top:10px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:15px;
+background:#1976d2;
+color:white;
+border:none;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1565c0;
+}
+
+.item{
+background:white;
+border-radius:15px;
+padding:15px;
+margin-top:15px;
+box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.item h3{
+margin-bottom:8px;
+color:#1976d2;
+}
+
+.total{
+margin-top:20px;
+font-size:22px;
+font-weight:bold;
+text-align:right;
+color:#d32f2f;
+}
+
+.deleteBtn{
+background:#e53935;
+margin-top:10px;
+}
+
+.deleteBtn:hover{
+background:#c62828;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+💳 My Installments
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>เพิ่มรายการผ่อน</h2>
+
+<input
+id="name"
+placeholder="ชื่อสินค้า">
+
+<input
+id="price"
+type="number"
+placeholder="ยอดผ่อนต่อเดือน">
+
+<button onclick="addItem()">
+เพิ่มรายการ
+</button>
+
+</div>
+
+<div id="list"></div>
+
+<div class="total">
+รวมต่อเดือน :
+<span id="total">0</span>
+บาท
+</div>
+
+<script>
+let items=[];
+
+function saveData(){
+localStorage.setItem("installments",JSON.stringify(items));
+}
+
+function loadData(){
+
+let data=localStorage.getItem("installments");
+
+if(data){
+items=JSON.parse(data);
+render();
+}
+
+}
+
+function addItem(){
+
+let name=document.getElementById("name").value.trim();
+let price=parseFloat(document.getElementById("price").value);
+
+if(name=="" || isNaN(price)){
+alert("กรอกข้อมูลให้ครบ");
+return;
+}
+
+items.push({
+name:name,
+price:price
+});
+
+saveData();
+
+document.getElementById("name").value="";
+document.getElementById("price").value="";
+
+render();
+
+}
+
+function deleteItem(index){
+
+if(confirm("ลบรายการนี้ใช่ไหม?")){
+
+items.splice(index,1);
+
+saveData();
+
+render();
+
+}
+
+}
+function render(){
+
+let html="";
+let total=0;
+
+for(let i=0;i<items.length;i++){
+
+html+=`
+<div class="item">
+
+<h3>${items[i].name}</h3>
+
+<p>ยอดผ่อนต่อเดือน <b>${items[i].price.toLocaleString()} บาท</b></p>
+
+<button class="deleteBtn"
+onclick="deleteItem(${i})">
+ลบรายการ
+</button>
+
+</div>
+`;
+
+total+=items[i].price;
+
+}
+
+document.getElementById("list").innerHTML=html;
+
+document.getElementById("total").innerText=
+total.toLocaleString();
+
+}
+
+loadData();
+</script>
+
+</body>
+</html>
