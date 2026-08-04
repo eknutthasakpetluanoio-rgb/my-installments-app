@@ -1,189 +1,53 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
 
-  <meta name="theme-color" content="#0b0b0d">
+<title>My Installments</title>
 
-  <title>My Installments</title>
+<link rel="stylesheet" href="style.css">
 
-  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="topbar">
-    <div>
-      <h1>⚫ My Installments</h1>
-      <p>💳 ติดตามการผ่อนของฉัน</p>
-    </div>
-  </header>
+<header class="header">
 
+<h1>⚫ My Installments</h1>
 
-  <main class="container">
+<p>💳 ติดตามการผ่อนของฉัน</p>
 
-    <!-- SUMMARY -->
-    <section class="summary-card">
+</header>
 
-      <p class="summary-label">
-        ยอดที่ต้องจ่าย
-      </p>
+<main class="container">
 
-      <h2 id="monthlyTotal">
-        2,625 บาท
-      </h2>
+<div class="dashboard">
 
-      <p class="summary-sub">
-        รายการผ่อนทั้งหมด 3 สัญญา
-      </p>
+<h2>ต้องจ่ายเดือนนี้</h2>
 
-    </section>
+<div class="price">
 
+2,625 บาท
 
-    <!-- SECTION TITLE -->
-    <div class="section-title">
-      <h2>รายการของฉัน</h2>
-      <span>3 รายการ</span>
-    </div>
+</div>
 
+<p>
 
-    <!-- VIVO V70 -->
-    <section class="installment-card">
+3 สัญญา
 
-      <div class="card-head">
+</p>
 
-        <div class="product-icon">
-          📱
-        </div>
+</div>
 
-        <div>
-          <h3>vivo V70</h3>
-          <p>สัญญา SBR0001339</p>
-        </div>
+<div id="contracts">
 
-      </div>
+</div>
 
-      <div class="info-row">
-        <span>ยอดผ่อน</span>
-        <strong>2,230 บาท/เดือน</strong>
-      </div>
+</main>
 
-      <div class="info-row">
-        <span>จำนวนงวด</span>
-        <strong>14 งวด</strong>
-      </div>
-
-      <div class="status waiting">
-        ● รอชำระ
-      </div>
-
-      <button onclick="openDetail('vivo')">
-        ดูรายละเอียด
-      </button>
-
-    </section>
-
-
-    <!-- REDMI WATCH -->
-    <section class="installment-card">
-
-      <div class="card-head">
-
-        <div class="product-icon">
-          ⌚
-        </div>
-
-        <div>
-          <h3>Redmi Watch 5 Lite</h3>
-          <p>ผ่อนรายสัปดาห์</p>
-        </div>
-
-      </div>
-
-      <div class="info-row">
-        <span>ยอดผ่อน</span>
-        <strong>265 บาท/สัปดาห์</strong>
-      </div>
-
-      <div class="info-row">
-        <span>จำนวนงวด</span>
-        <strong>12 งวด</strong>
-      </div>
-
-      <div class="status waiting">
-        ● รอชำระ
-      </div>
-
-      <button onclick="openDetail('watch')">
-        ดูรายละเอียด
-      </button>
-
-    </section>
-
-
-    <!-- SOUNDCORE -->
-    <section class="installment-card">
-
-      <div class="card-head">
-
-        <div class="product-icon">
-          🎧
-        </div>
-
-        <div>
-          <h3>Soundcore R60i NC</h3>
-          <p>สัญญา CT-202607-0054</p>
-        </div>
-
-      </div>
-
-      <div class="info-row">
-        <span>ยอดผ่อน</span>
-        <strong>130 บาท/สัปดาห์</strong>
-      </div>
-
-      <div class="info-row">
-        <span>จำนวนงวด</span>
-        <strong>12 งวด</strong>
-      </div>
-
-      <div class="status waiting">
-        ● รอชำระ
-      </div>
-
-      <button onclick="openDetail('soundcore')">
-        ดูรายละเอียด
-      </button>
-
-    </section>
-
-  </main>
-
-
-  <nav class="bottom-nav">
-
-    <div class="nav-active">
-      <span>⌂</span>
-      <small>หน้าหลัก</small>
-    </div>
-
-    <div>
-      <span>✓</span>
-      <small>ชำระแล้ว</small>
-    </div>
-
-    <div>
-      <span>⚙</span>
-      <small>ตั้งค่า</small>
-    </div>
-
-  </nav>
-
-
-  <script src="app.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
@@ -191,27 +55,26 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
-    background:#0f1115;
-    color:#fff;
-    padding-bottom:90px;
+    background:#121212;
+    color:#ffffff;
 }
 
-.topbar{
+.header{
+    background:#1b1b1b;
     padding:25px 20px;
-    background:#151922;
-    border-bottom:1px solid #222;
+    border-bottom:1px solid #2d2d2d;
 }
 
-.topbar h1{
+.header h1{
     font-size:28px;
-    margin-bottom:6px;
 }
 
-.topbar p{
+.header p{
+    margin-top:6px;
     color:#9ca3af;
 }
 
@@ -219,346 +82,140 @@ body{
     padding:20px;
 }
 
-.summary-card{
+.dashboard{
     background:linear-gradient(135deg,#2563eb,#1d4ed8);
-    padding:22px;
-    border-radius:22px;
+    border-radius:20px;
+    padding:20px;
     margin-bottom:25px;
 }
 
-.summary-label{
-    opacity:.85;
-    font-size:15px;
+.dashboard h2{
+    font-size:18px;
+    opacity:.9;
 }
 
-.summary-card h2{
+.price{
     font-size:38px;
-    margin:8px 0;
+    font-weight:bold;
+    margin:12px 0;
 }
 
-.summary-sub{
-    opacity:.85;
+.dashboard p{
+    opacity:.9;
 }
 
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:15px;
-}
-
-.section-title span{
-    color:#9ca3af;
-}
-
-.installment-card{
-    background:#1a1f29;
-    border-radius:20px;
+.card{
+    background:#1e1e1e;
+    border-radius:18px;
     padding:18px;
     margin-bottom:18px;
-    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
 }
 
-.card-head{
-    display:flex;
-    align-items:center;
-    margin-bottom:16px;
+.card-title{
+    font-size:22px;
+    font-weight:bold;
 }
 
-.product-icon{
-    width:58px;
-    height:58px;
-    border-radius:18px;
-    background:#2563eb;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    margin-right:14px;
-}
-
-.card-head h3{
-    font-size:20px;
-}
-
-.card-head p{
+.card-sub{
     color:#9ca3af;
-    margin
-// ================================
+    margin-top:5px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:14px;
+}
+
+.status{
+    margin-top:15px;
+    color:#f59e
+// ===========================
 // My Installments V3
 // app.js
-// ================================
+// ===========================
 
-const contracts = {
-  vivo: {
-    name: "vivo V70",
-    contract: "SBR0001339",
-    amount: 2230,
-    installment: 14
-  },
+const contracts = [
 
-  watch: {
-    name: "Redmi Watch 5 Lite",
-    amount: 265,
-    installment: 12
-  },
+{
+    icon:"📱",
+    name:"vivo V70",
+    sub:"เลขสัญญา SBR0001339",
+    amount:"2,230 บาท / เดือน",
+    installment:"14 งวด",
+    status:"🟠 รอชำระ",
+    id:"vivo"
+},
 
-  soundcore: {
-    name: "Soundcore R60i NC",
-    amount: 130,
-    installment: 12
-  }
-};
+{
+    icon:"⌚",
+    name:"Redmi Watch 5 Lite",
+    sub:"ยอดคงเหลือ 3,180 บาท",
+    amount:"265 บาท / สัปดาห์",
+    installment:"12 งวด",
+    status:"🟠 รอชำระ",
+    id:"watch"
+},
 
-function openDetail(id){
-
-    const item = contracts[id];
-
-    if(!item){
-        alert("ไม่พบข้อมูล");
-        return;
-    }
-
-    localStorage.setItem(
-        "currentContract",
-        JSON.stringify(item)
-    );
-
-    window.location.href="detail.html";
-
+{
+    icon:"🎧",
+    name:"Soundcore R60i NC",
+    sub:"ยอดคงเหลือ 1,300 บาท",
+    amount:"130 บาท / สัปดาห์",
+    installment:"12 งวด",
+    status:"🟠 รอชำระ",
+    id:"soundcore"
 }
-<!DOCTYPE html>
-<html lang="th">
 
-<head>
+];
 
-<meta charset="UTF-8">
+const list=document.getElementById("contracts");
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1">
+contracts.forEach(item=>{
 
-<title>รายละเอียดสัญญา</title>
+list.innerHTML+=`
 
-<link rel="stylesheet"
-href="style.css">
+<div class="card">
 
-</head>
+<div class="card-title">
 
-<body>
-
-<header class="topbar">
-
-<h1 id="title">
-
-รายละเอียดสัญญา
-
-</h1>
-
-<p id="subTitle">
-
-My Installments
-
-</p>
-
-</header>
-
-<div class="container">
-
-<div class="summary-card">
-
-<p class="summary-label">
-
-ยอดผ่อนต่องวด
-
-</p>
-
-<h2 id="amount">
-
-0 บาท
-
-</h2>
-
-<p id="contractNo">
-
--
-
-</p>
+${item.icon} ${item.name}
 
 </div>
 
-<div class="installment-card">
+<div class="card-sub">
 
-<div class="info-row">
+${item.sub}
+
+</div>
+
+<div class="row">
+
+<span>ยอดผ่อน</span>
+
+<strong>${item.amount}</strong>
+
+</div>
+
+<div class="row">
 
 <span>จำนวนงวด</span>
 
-<strong id="installment">
-
-0
-
-</strong>
+<strong>${item.installment}</strong>
 
 </div>
 
-<div class="info-row">
+<div class="status">
 
-<span>สถานะ</span>
-
-<strong class="waiting">
-
-รอพัฒนา
-
-</strong>
-
-</div>
+${item.status}
 
 </div>
 
 <button
-onclick="history.back()">
+class="btn">
 
-กลับหน้าหลัก
-
-</button>
-
-</div>
-
-<script>
-
-const data=
-JSON.parse(
-localStorage.getItem(
-"currentContract"
-)
-);
-
-if(data){
-
-document.getElementById(
-"title"
-).innerHTML=data.name;
-
-document.getElementById(
-"amount"
-).innerHTML=
-
-data.amount.toLocaleString()
-
-+" บาท";
-
-document.getElementById(
-"installment"
-).innerHTML=
-
-data.installment+" งวด";
-
-if(data.contract){
-
-document.getElementById(
-"contractNo"
-).innerHTML=
-
-"เลขสัญญา : "+data.contract;
-
-}
-
-}
-
-</script>
-
-</body>
-
-</html>
-// =============================
-// My Installments V3
-// =============================
-
-const contracts = {
-
-vivo:{
-    id:"vivo",
-    name:"vivo V70",
-    contract:"SBR0001339",
-    amount:2230,
-    totalInstallments:14,
-    type:"monthly"
-},
-
-watch:{
-    id:"watch",
-    name:"Redmi Watch 5 Lite",
-    amount:265,
-    totalInstallments:12,
-    type:"weekly"
-},
-
-soundcore:{
-    id:"soundcore",
-    name:"Soundcore R60i NC",
-    amount:130,
-    totalInstallments:12,
-    type:"weekly"
-}
-
-};
-
-function openDetail(id){
-
-const contract=contracts[id];
-
-localStorage.setItem(
-"currentContract",
-JSON.stringify(contract)
-);
-
-window.location.href="detail.html";
-
-}
-
-function getSchedules(contract){
-
-let schedules=[];
-
-for(let i=1;i<=contract.totalInstallments;i++){
-
-schedules.push({
-
-no:i,
-
-amount:contract.amount,
-
-paid:false
-
-});
-
-}
-
-return schedules;
-
-}
-const schedules = getSchedules(data);
-
-let html="";
-
-schedules.forEach(item=>{
-
-html+=`
-
-<div class="installment-card">
-
-<h3>งวด ${item.no}</h3>
-
-<div class="info-row">
-
-<span>ยอด</span>
-
-<strong>${item.amount.toLocaleString()} บาท</strong>
-
-</div>
-
-<button>
-
-ชำระเงิน
+ดูรายละเอียด
 
 </button>
 
@@ -567,5 +224,3 @@ html+=`
 `;
 
 });
-
-document.querySelector(".container").innerHTML+=html;
