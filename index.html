@@ -219,21 +219,35 @@ html+=`
 
 <div class="schedule">
 
-<h3>งวด ${item.no}</h3>
+<h3>งวดที่ ${item.no}</h3>
 
-<p>📅 ${item.date}</p>
+<p><b>📅 กำหนดชำระ</b></p>
 
-<p>💰 ${item.amount.toLocaleString()} บาท</p>
+<p>${item.date}</p>
 
-<p id="status${index}">
-${item.paid ? "🟢 ชำระแล้ว" : "🔴 ยังไม่ชำระ"}
+<p><b>💰 ยอดคงค้าง</b></p>
+
+<p>${item.amount.toLocaleString()} บาท</p>
+
+<p><b>สถานะ</b></p>
+
+<p style="color:${item.paid ? "#2e7d32":"#ff9800"};font-weight:bold;">
+
+${item.paid ? "✅ ชำระแล้ว" : "🟠 ยังไม่ชำระ"}
+
 </p>
 
 <button
+
 class="back"
+
+${item.paid ? "disabled":""}
+
+style="${item.paid ? "background:#9e9e9e;cursor:not-allowed;" : ""}"
+
 onclick="pay(${index})">
 
-${item.paid ? "ยกเลิกการชำระ" : "ชำระงวดนี้"}
+${item.paid ? "ชำระแล้ว" : "ชำระเงิน"}
 
 </button>
 
