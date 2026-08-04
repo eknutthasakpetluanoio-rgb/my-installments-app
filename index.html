@@ -18,7 +18,7 @@ font-family:'Kanit',sans-serif;
 }
 
 body{
-background:#f3f5f9;
+background:#f4f6fb;
 }
 
 header{
@@ -26,7 +26,7 @@ background:#1976d2;
 color:#fff;
 padding:22px;
 text-align:center;
-font-size:30px;
+font-size:32px;
 font-weight:bold;
 }
 
@@ -69,17 +69,23 @@ cursor:pointer;
 
 .add{
 background:#1976d2;
-color:white;
+color:#fff;
+}
+
+.detail{
+background:#43a047;
+color:#fff;
+margin-top:12px;
 }
 
 .delete{
 background:#d32f2f;
-color:white;
-margin-top:15px;
+color:#fff;
+margin-top:12px;
 }
 
 .item{
-background:white;
+background:#fff;
 padding:20px;
 border-radius:18px;
 box-shadow:0 5px 15px rgba(0,0,0,.08);
@@ -87,24 +93,24 @@ margin-bottom:20px;
 }
 
 .item h3{
-font-size:26px;
+font-size:28px;
 margin-bottom:10px;
 }
 
 .item p{
-font-size:19px;
-margin:6px 0;
+font-size:20px;
+margin:8px 0;
 }
 
 #total{
-font-size:36px;
+font-size:34px;
 font-weight:bold;
-text-align:right;
 color:#d32f2f;
+text-align:right;
 margin-top:20px;
 }
-
 </style>
+
 </head>
 
 <body>
@@ -139,9 +145,9 @@ onclick="addItem()">
 
 <div id="list"></div>
 
-<div id="total">
+<h2 id="total">
 รวมต่อเดือน : 0 บาท
-</div>
+</h2>
 
 </div>
 
@@ -165,10 +171,10 @@ JSON.stringify(items)
 
 function addItem(){
 
-let name =
-document.getElementById("name").value;
+const name =
+document.getElementById("name").value.trim();
 
-let price =
+const price =
 Number(document.getElementById("price").value);
 
 if(name=="" || price<=0){
@@ -198,11 +204,27 @@ document.getElementById("price").value="";
 }
 function deleteItem(index){
 
+if(confirm("ต้องการลบรายการนี้ใช่หรือไม่?")){
+
 items.splice(index,1);
 
 save();
 
 render();
+
+}
+
+}
+
+function detail(index){
+
+alert(
+"หน้ารายละเอียดกำลังพัฒนา\n\n"+
+"สินค้า : "+items[index].name+
+"\nยอดผ่อน : "+
+items[index].price.toLocaleString()+
+" บาท/เดือน"
+);
 
 }
 
@@ -212,22 +234,32 @@ let html="";
 
 let total=0;
 
-for(let i=0;i<items.length;i++){
+items.forEach((item,index)=>{
 
-total+=items[i].price;
+total+=Number(item.price);
 
 html+=`
 
 <div class="item">
 
-<h3>📱 ${items[i].name}</h3>
+<h3>📱 ${item.name}</h3>
 
-<p>💰 ผ่อนเดือนละ :
-<b>${items[i].price.toLocaleString()} บาท</b></p>
+<p>
+💰 ผ่อนเดือนละ :
+<b>${Number(item.price).toLocaleString()} บาท</b>
+</p>
+
+<button
+class="detail"
+onclick="detail(${index})">
+
+ดูรายละเอียด
+
+</button>
 
 <button
 class="delete"
-onclick="deleteItem(${i})">
+onclick="deleteItem(${index})">
 
 ลบรายการ
 
@@ -237,7 +269,7 @@ onclick="deleteItem(${i})">
 
 `;
 
-}
+});
 
 document.getElementById("list").innerHTML=html;
 
@@ -253,5 +285,4 @@ total.toLocaleString()
 </script>
 
 </body>
-
 </html>
