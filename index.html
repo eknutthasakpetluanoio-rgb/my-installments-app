@@ -1,39 +1,257 @@
-from zipfile import ZipFile
-from pathlib import Path
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-base=Path('/mnt/data/my-installments-v1')
-base.mkdir(exist_ok=True)
-
-(base/'index.html').write_text("""<!DOCTYPE html>
-<html lang="th"><head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>My Installments</title>
-<link rel="stylesheet" href="style.css">
-</head><body>
-<header>💳 My Installments</header>
-<div class="wrap">
+
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Kanit',sans-serif;
+}
+
+body{
+background:#f3f5f9;
+}
+
+header{
+background:#1976d2;
+color:#fff;
+padding:22px;
+text-align:center;
+font-size:30px;
+font-weight:bold;
+}
+
+.container{
+max-width:700px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#fff;
+padding:25px;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+margin-bottom:25px;
+}
+
+h2{
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+padding:16px;
+margin-bottom:16px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:18px;
+}
+
+button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:12px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.add{
+background:#1976d2;
+color:white;
+}
+
+.delete{
+background:#d32f2f;
+color:white;
+margin-top:15px;
+}
+
+.item{
+background:white;
+padding:20px;
+border-radius:18px;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+margin-bottom:20px;
+}
+
+.item h3{
+font-size:26px;
+margin-bottom:10px;
+}
+
+.item p{
+font-size:19px;
+margin:6px 0;
+}
+
+#total{
+font-size:36px;
+font-weight:bold;
+text-align:right;
+color:#d32f2f;
+margin-top:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+💳 My Installments
+</header>
+
+<div class="container">
+
 <div class="card">
-<input id="name" placeholder="ชื่อสินค้า">
-<input id="price" type="number" placeholder="ยอดผ่อนต่อเดือน">
-<button onclick="addItem()">เพิ่มรายการ</button>
+
+<h2>เพิ่มรายการผ่อน</h2>
+
+<input
+id="name"
+type="text"
+placeholder="ชื่อสินค้า">
+
+<input
+id="price"
+type="number"
+placeholder="ยอดผ่อนต่อเดือน">
+
+<button
+class="add"
+onclick="addItem()">
+เพิ่มรายการ
+</button>
+
 </div>
+
 <div id="list"></div>
-<h3>รวมต่อเดือน: <span id="total">0</span> บาท</h3>
+
+<div id="total">
+รวมต่อเดือน : 0 บาท
 </div>
-<script src="app.js"></script>
-</body></html>""",encoding="utf-8")
 
-(base/'style.css').write_text("""body{font-family:Arial,sans-serif;background:#f2f4f8;margin:0}header{background:#1976d2;color:#fff;padding:16px;text-align:center;font-size:24px}.wrap{max-width:700px;margin:auto;padding:20px}.card,.item{background:#fff;padding:16px;border-radius:12px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.1)}input,button{width:100%;padding:12px;margin:8px 0;box-sizing:border-box}button{background:#1976d2;color:#fff;border:none;border-radius:8px}.delete{background:#c62828}""",encoding="utf-8")
+</div>
 
-(base/'app.js').write_text("""let items=JSON.parse(localStorage.getItem('installments')||'[]');
-function save(){localStorage.setItem('installments',JSON.stringify(items))}
-function render(){let h='',t=0;items.forEach((i,x)=>{t+=Number(i.price);h+=`<div class="item"><b>${i.name}</b><br>${i.price} บาท/เดือน<br><button class="delete" onclick="del(${x})">ลบ</button></div>`});document.getElementById('list').innerHTML=h;document.getElementById('total').textContent=t.toLocaleString();}
-function addItem(){const n=name.value.trim(),p=price.value;if(!n||!p)return alert('กรอกข้อมูล');items.push({name:n,price:Number(p)});save();render();name.value='';price.value='';}
-function del(i){items.splice(i,1);save();render();}
-render();""",encoding="utf-8")
+<script>
 
-zip_path='/mnt/data/my-installments-v1.zip'
-with ZipFile(zip_path,'w') as z:
-    for f in base.iterdir():
-        z.write(f,f.name)
-print(zip_path)
+let items =
+JSON.parse(
+localStorage.getItem("items")
+) || [];
+
+render();
+
+function save(){
+
+localStorage.setItem(
+"items",
+JSON.stringify(items)
+);
+
+}
+
+function addItem(){
+
+let name =
+document.getElementById("name").value;
+
+let price =
+Number(document.getElementById("price").value);
+
+if(name=="" || price<=0){
+
+alert("กรอกข้อมูลให้ครบ");
+
+return;
+
+}
+
+items.push({
+
+name:name,
+
+price:price
+
+});
+
+save();
+
+render();
+
+document.getElementById("name").value="";
+
+document.getElementById("price").value="";
+
+}
+function deleteItem(index){
+
+items.splice(index,1);
+
+save();
+
+render();
+
+}
+
+function render(){
+
+let html="";
+
+let total=0;
+
+for(let i=0;i<items.length;i++){
+
+total+=items[i].price;
+
+html+=`
+
+<div class="item">
+
+<h3>📱 ${items[i].name}</h3>
+
+<p>💰 ผ่อนเดือนละ :
+<b>${items[i].price.toLocaleString()} บาท</b></p>
+
+<button
+class="delete"
+onclick="deleteItem(${i})">
+
+ลบรายการ
+
+</button>
+
+</div>
+
+`;
+
+}
+
+document.getElementById("list").innerHTML=html;
+
+document.getElementById("total").innerHTML=
+
+"รวมต่อเดือน : "+
+
+total.toLocaleString()
+
++" บาท";
+
+}
+</script>
+
+</body>
+
+</html>
